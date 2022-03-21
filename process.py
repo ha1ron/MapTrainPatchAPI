@@ -1,6 +1,6 @@
 from DB import SQLMaker
 
-db = SQLMaker("D:/sqlitestudio-3.3.3/database/map_pr")
+db = SQLMaker("database/map_pr")
 
 
 def investigationSet(month, poezd):
