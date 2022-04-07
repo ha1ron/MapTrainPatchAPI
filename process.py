@@ -1,6 +1,8 @@
 from DB import SQLMaker
+import threading
 
 db = SQLMaker("database/map_pr")
+lock = threading.Lock()
 
 
 def investigationSet(month, poezd):
@@ -59,3 +61,16 @@ def stNumberingSet(month, poezd):
                'STANTION_FINISH': line[3], 'NUMBER': int(line[4]), 'CASAR': line[5], 'CHET': line[6]}
         result_set.append(row)
     return result_set
+
+
+def poezdSuggestSet(poezd):
+    with lock:
+        data = db.get_poezdSuggestSet(poezd)
+    if len(data) == 0:
+        return []
+    result_set = []
+    for line in data:
+        # row = {'poezd': line[0]}
+        result_set.append(line[0])
+    return result_set
+

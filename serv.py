@@ -78,6 +78,12 @@ def get_stNumberingSet():
     set = data.stNumberingSet(month, poezd)
     return jsonify(set)
 
+@app.route('/PoezdSuggest', methods=['GET'])
+@auth.login_required
+def get_poezdSuggestSet():
+    poezd = request.args.get('poezd')
+    set = data.poezdSuggestSet(poezd)
+    return jsonify(set)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -60,4 +60,9 @@ class SQLMaker:
                                           a."/BIC/GO_POEZD" = ?
                                           order by a.STAGENUM;""", (month, poezd)).fetchall()
 
-
+    def get_poezdSuggestSet(self, poezd):
+        with self.connection:
+            return self.cursor.execute("""SELECT DISTINCT "/BIC/GO_POEZD"
+                                            FROM [/BIC/AZGO_PWAY2]
+                                            where "/BIC/GO_POEZD" like ?
+                                            LIMIT 25;""", [poezd]).fetchall()
